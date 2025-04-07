@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anime Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+    .anime-card { border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Anime Streaming Site</h1>
+  <div id="anime-list">Loading...</div>
+  <script>
+    fetch('http://localhost:3001/api/anime')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('anime-list').innerHTML = data.map(anime => (
+          `<div class="anime-card">
+            <h2>${anime.title}</h2>
+            <p>${anime.description}</p>
+            <a href="${anime.videoUrl}" target="_blank">Watch</a> | 
+            <a href="${anime.downloadUrl}" target="_blank">Download</a>
+          </div>`
+        )).join('');
+      });
+  </script>
+</body>
+</html>
